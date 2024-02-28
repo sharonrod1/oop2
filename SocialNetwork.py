@@ -1,38 +1,41 @@
 import collections
-
 from User import User
 
 
 class SocialNetwork:
     _instance = None
-    users = collections.deque()
+    users = {}
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def add_user(self, users):
-        valid = False
-        while not valid:
-            username = input("Enter Desired Username: ")
-            if username not in users:
-                valid = True
+    # def __init__(self):
+    #     self.User = None
+    #     users = {}
 
-        valid = False
-        while not valid:
-            password = input("Enter Desired Password (Must Contain only 4-8 Characters): ")
-            if len(password) >= 4 and len(password) <= 8:
-                valid = True
+    def sign_up(self, username, password):
+        valid = True
+        if username in self.users:
+            valid = False
 
-        users.append(User(username, password))
+        if 4 <= len(password) <= 8:
+            valid = False
 
-    def remove_user(self, users):
-        if self in users:
-            users.remove(self)
+        if valid:
+            self.users.update({username: User(username, password)})
 
-    def connect(self):
-        self.User.set_connected(True)
+        else:
+            print("Invalid")
 
-    def disconnect(self):
-        self.User.set_connected(False)
+    def remove_user(self, user):
+        self.users.pop(user.get_username())
+
+    @staticmethod
+    def log_in(user):
+        user.set_connected(True)
+
+    @staticmethod
+    def log_out(user):
+        user.set_connected(False)
