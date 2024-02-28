@@ -1,7 +1,7 @@
-import collections
-import TextPost
-import ImagePost
-import SalePost
+from TextPost import TextPost
+from ImagePost import ImagePost
+from SalePost import SalePost
+
 
 
 class User():
@@ -22,19 +22,20 @@ class User():
     def get_password(self):
         return self.password
 
-    # def do_like(Post):
-    #     return
 
     def follow(self, user):
         user.followers.append(self)
 
-    def publish_post(self, string, text):
+    def publish_post(self,string,text,info2 = None, info3 = None):
         if string == "Text":
-            new_textP = TextPost.TextPost(text)
+            new_textP = TextPost(text)
             self.posts.append(new_textP)
+            return new_textP
         if string == "Image":
-            new_textM = ImagePost.ImagePost(text)
+            new_textM = ImagePost(text)
             self.posts.append(new_textM)
+            return new_textM
         if string == "Sale":
-            new_textP = SalePost.SalePost(text)
-            self.posts.append(new_textP)
+            new_textS = SalePost(text,info2,info3)
+            self.posts.append(new_textS)
+            return new_textS

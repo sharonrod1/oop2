@@ -1,13 +1,11 @@
-import Posts
-import User
+from Posts import Posts
 
 
 class TextPost(Posts):
-    def __init__(self,text):
-        self.text=text
+    def __init__(self, text):
         super().__init__(self)
-    def do_like(self):
-        super().do_like()
+        self.text = text
+
 
     def comment_on_post(self):
         super().comment_on_post()
