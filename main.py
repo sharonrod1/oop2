@@ -74,7 +74,7 @@ def main():
 
     # Using unfollow
     u2.unfollow(u1)
-    # u3.unfollow(u2)
+    u3.unfollow(u2)
     print()
 
     # Using log_in & log_out

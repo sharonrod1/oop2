@@ -3,7 +3,6 @@ import collections
 
 
 class Posts(ABC):
-    likes = 0
     comments = {}
     liked = []
     publisher = ""
@@ -13,25 +12,30 @@ class Posts(ABC):
         self.comments = {}
         self.publisher = User
         self.data = ''
+        User.posts.append(self)
 
     def like(self, user):
         self.liked.append(user)
-        self.likes += 1
+        if user.username != self.publisher.username:
+            print("Notification to " + self.publisher.username + ": "+user.username+" liked your post")
+            notification = user.username+" has liked your post"
+            self.publisher.notifications.append(notification)
 
     def comment(self, user, comment):
         self.comments.update({user: comment})
+        if user.username != self.publisher.username:
+            print("Notification to " + self.publisher.username + ": "+user.username+" commented on your post: "+comment)
+            notification = user.username+" has commented "+comment
+            self.publisher.notifications.append(notification)
 
     def print_post_details(self):
-        print(self.likes, self.comments, self.publisher, self.data)
-
-    def post_data(self, data):
-        self.data = data
+        print("got to understand")
+        print(len(self.liked), len(self.comments), self.publisher.username)
 
     def get_publisher(self):
         return self.publisher
 
-    def getdata(self):
-        return self.publisher
+
 
 
 
