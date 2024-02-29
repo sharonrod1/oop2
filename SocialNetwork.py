@@ -6,34 +6,34 @@ class SocialNetwork:
     _instance = None
     users = {}
     network_name = ''
+    connected_users = []
 
-    def __new__(self, network_name):
-        if self._instance is None:
-            self._instance = super().__new__(self)
-            self.network_name = network_name
-        return self._instance
+    def __new__(cls, network_name):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls.network_name = network_name
+        return cls._instance
 
     def sign_up(self, username, password):
-        valid = True
         if username in self.users:
-            valid = False
+            raise ValueError('Username already exists')
 
         if not 4 <= len(password) <= 8:
-            valid = False
+            raise ValueError('Invalid password')
 
-        if valid:
-            self.users.update({username: User(username, password)})
-            return User(username, password)
-        else:
-            print("Invalid")
+        self.users.update({username: User(username, password)})
+        self.connected_users.append(username)
+        return User(username, password)
 
     def remove_user(self, user):
         self.users.pop(user.get_username())
 
-    @staticmethod
-    def log_in(user):
-        user.set_connected(True)
+    def log_in(self, username, password):
+        user = self.users.get(username)
+        if user.get_password() == password:
+            self.connected_users.append(username)
+        else:
+            raise ValueError('Incorrect password')
 
-    @staticmethod
-    def log_out(user):
-        user.set_connected(False)
+    def log_out(self, username):
+        self.connected_users.remove(username)

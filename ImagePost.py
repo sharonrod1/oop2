@@ -1,6 +1,13 @@
 from Posts import Posts
-import User
-class ImagePost(Posts):
-    def __init__(self, image):
-        self.image = image
+from PIL import Image
+import matplotlib.pyplot as plt
+import numpy as np
 
+class ImagePost(Posts):
+    def __init__(self, user, image):
+        self.image = image
+        super().__init__(user)
+
+    def display(self):
+        img = np.asarray(Image.open(self.image))
+        plt.imshow(img)

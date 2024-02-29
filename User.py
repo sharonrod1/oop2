@@ -1,12 +1,11 @@
 from TextPost import TextPost
 from ImagePost import ImagePost
 from SalePost import SalePost
-
-
+from post_Factory import posts_Factory
 
 class User():
     posts = []
-
+    password = 0
     def __init__(self, username, password, connected=True):
         self.username = username
         self.password = password
@@ -22,20 +21,14 @@ class User():
     def get_password(self):
         return self.password
 
-
     def follow(self, user):
         user.followers.append(self)
 
-    def publish_post(self,string,text,info2 = None, info3 = None):
-        if string == "Text":
-            new_textP = TextPost(text)
-            self.posts.append(new_textP)
-            return new_textP
-        if string == "Image":
-            new_textM = ImagePost(text)
-            self.posts.append(new_textM)
-            return new_textM
-        if string == "Sale":
-            new_textS = SalePost(text,info2,info3)
-            self.posts.append(new_textS)
-            return new_textS
+    def return_password(self):
+        return self.password
+
+    def publish_post(self,post_type, information, price=None, location=None):
+        return posts_Factory.create_posts(self, post_type, information, price, location)
+
+    def unfollow(self, user):
+        user.followers.remove(self)

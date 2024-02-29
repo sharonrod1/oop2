@@ -1,5 +1,7 @@
 from SocialNetwork import SocialNetwork
 from User import User
+
+
 def main():
     # Creating the network
     network = SocialNetwork("Twitter")
@@ -23,7 +25,6 @@ def main():
     u4.follow(u1)
     u5.follow(u2)
     u5.follow(u4)
-
 
     # Creating text post
     p1 = u1.publish_post("Text", "In 1492, Christopher Columbus set sail,\n"
@@ -63,7 +64,6 @@ def main():
     p3.sold("pass3")
     print()
 
-    print(p3)
 
     # Displaying the image of the post
     p2.display()
@@ -74,7 +74,7 @@ def main():
 
     # Using unfollow
     u2.unfollow(u1)
-    u3.unfollow(u2)
+    # u3.unfollow(u2)
     print()
 
     # Using log_in & log_out
