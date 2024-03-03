@@ -22,7 +22,8 @@ class SocialNetwork:
         if not 4 <= len(password) <= 8:
             raise ValueError('Invalid password')
 
-        self.users.update({username: User(username, password)})
+        user_new = User(username, password)
+        self.users.update({username: user_new})
         self.connected_users.append(username)
         return user_new
 
