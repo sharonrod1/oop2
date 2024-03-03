@@ -17,16 +17,16 @@ class Posts(ABC):
     def like(self, user):
         self.liked.append(user)
         if user.username != self.publisher.username:
-            print("notification to " + self.publisher.username + ": "+user.username+" liked your post")
-            notification = user.username+" liked your post"
-            self.publisher.notifications.append(notification)
+            print("notification to " + self.publisher.username + ": "+user.username + " liked your post")
+            notification = user.username + " liked your post"
+            self.publisher.notification_update(notification)
 
     def comment(self, user, comment):
         self.comments.update({user: comment})
         if user.username != self.publisher.username:
-            print("notification to " + self.publisher.username + ": "+user.username+" commented on your post: "+comment)
+            print("notification to " + self.publisher.username + ": " + user.username + " commented on your post: " + comment)
             notification = user.username+" commented on your post"
-            self.publisher.notifications.append(notification)
+            self.publisher.notification_update(notification)
 
     def print_post_details(self):
         print("got to understand")

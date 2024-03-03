@@ -1,7 +1,7 @@
 from Posts import Posts
 from PIL import Image
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 class ImagePost(Posts):
     def __init__(self, user, image):

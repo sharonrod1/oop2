@@ -1,4 +1,3 @@
-import collections
 from User import User
 
 
@@ -12,7 +11,7 @@ class SocialNetwork:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls.network_name = network_name
-            print("The social network "+network_name+ " was created!")
+            print("The social network " + network_name + " was created!")
         return cls._instance
 
     def sign_up(self, username, password):
@@ -25,7 +24,7 @@ class SocialNetwork:
         user_new = User(username, password)
         self.users.update({username: user_new})
         self.connected_users.append(username)
-        return user_new
+        return self.users[username]
 
     def remove_user(self, user):
         self.users.pop(user.get_username())
@@ -33,7 +32,7 @@ class SocialNetwork:
     def log_in(self, username, password):
         user = self.users.get(username)
         if user.get_password() == password:
-            user.connected=True
+            user.connected = True
             self.connected_users.append(username)
             print(user.username + " connected")
         else:
@@ -41,22 +40,14 @@ class SocialNetwork:
 
     def log_out(self, username):
         user = self.users.get(username)
-        user.connected=False
+        user.connected = False
         self.connected_users.remove(username)
         print(user.username+" disconnected")
 
     def __str__(self):
-        print( self.network_name+" social network:")
+        ans = ''
+        ans += (self.network_name+" social network:\n")
         for user in self.users:
-            print(self.users[user].__str__())
-        exit(0)
-        # if end=='':
-        #     exit(0)
+            ans += (self.users[user].__str__() + '\n')
 
-    # def str1(self):
-    #     print(self.network_name + " social network:")
-    #     for user in self.users:
-    #         print(user.__str__())
-    #
-    # def __str__(self):
-    #     self.str1()
+        return ans
