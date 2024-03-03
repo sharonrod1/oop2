@@ -28,14 +28,11 @@ class User:
     def return_password(self):
         return self.password
 
-    def notification_update(self, notification):
-        self.notifications.append(notification)
-
     def publish_post(self, post_type, information, price=None, location=None):
         if self.connected:
             for follower in self.followers:
                 notification = self.username + " has a new post"
-                follower.notification_update(notification)
+                follower.notifications.append(notification)
             return PostsFactory.create_posts(self, post_type, information, price, location)
 
     def unfollow(self, user):
