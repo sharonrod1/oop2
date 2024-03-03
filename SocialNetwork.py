@@ -12,7 +12,7 @@ class SocialNetwork:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls.network_name = network_name
-            print("the social network "+network_name+ " was created")
+            print("The social network "+network_name+ " was created!")
         return cls._instance
 
     def sign_up(self, username, password):
@@ -24,7 +24,7 @@ class SocialNetwork:
 
         self.users.update({username: User(username, password)})
         self.connected_users.append(username)
-        return User(username, password)
+        return user_new
 
     def remove_user(self, user):
         self.users.pop(user.get_username())
@@ -34,6 +34,7 @@ class SocialNetwork:
         if user.get_password() == password:
             user.connected=True
             self.connected_users.append(username)
+            print(user.username + " connected")
         else:
             raise ValueError('Incorrect password')
 
@@ -41,3 +42,20 @@ class SocialNetwork:
         user = self.users.get(username)
         user.connected=False
         self.connected_users.remove(username)
+        print(user.username+" disconnected")
+
+    def __str__(self):
+        print( self.network_name+" social network:")
+        for user in self.users:
+            print(self.users[user].__str__())
+        exit(0)
+        # if end=='':
+        #     exit(0)
+
+    # def str1(self):
+    #     print(self.network_name + " social network:")
+    #     for user in self.users:
+    #         print(user.__str__())
+    #
+    # def __str__(self):
+    #     self.str1()

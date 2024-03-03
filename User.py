@@ -13,6 +13,8 @@ class User():
         self.password = password
         self.connected = connected
         self.followers = []
+        self.posts = []
+        self.notifications = []
 
 
     def get_username(self):
@@ -41,3 +43,11 @@ class User():
         if self.connected:
             user.followers.remove(self)
             print(self.username + " unfollowed " + user.username)
+
+    def __str__(self):
+        return "User name: "+ str(self.username)+", Number of posts: " + str(len(self.posts))+", Number of followers: " + str(len(self.followers))
+
+    def print_notifications(self):
+        print(self.username+"'s notifications:")
+        for notification in self.notifications:
+            print(notification)

@@ -10,8 +10,7 @@ class SalePost(Posts):
         super().__init__(user)
         self.password=user.return_password()
         self.for_sale = True
-        print(user.username+"'s posted a product for sale: ")
-        print("For Sale! "+str(information)+", price:"+str(price)+", pickup from: "+str(location))
+        print(self.__str__())
 
     def discount(self, percent, password):
         if self.for_sale:
@@ -27,7 +26,10 @@ class SalePost(Posts):
     def sold(self, password):
         if (self.password == password):
             self.for_sale = False
-            print(self.publisher.username+"'s product is sold!")
+            print(self.publisher.username+"'s product is sold")
             print()
-            print(self.publisher.username + "'s posted a product for sale: ")
-            print("Sold! "+str(self.information)+", price:"+str(self.price)+", pickup from: "+str(self.location))
+            print(self.publisher.username + " posted a product for sale:")
+            print("Sold! "+str(self.information)+", price: "+str(self.price)+", pickup from: "+str(self.location))
+
+    def __str__(self):
+        return self.publisher.username+" posted a product for sale:\n"+"For sale! "+str(self.information)+", price: "+str(self.price)+", pickup from: "+str(self.location)+"\n"
